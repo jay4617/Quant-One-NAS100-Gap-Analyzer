@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS100 Gap Analyzer</title>
+    <meta name="description"
+        content="Quantitative analysis of NAS100 overnight gaps with real-time JARVIS intelligence, historical fill rates, and strategy backtesting.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <!-- ═══ PARALLAX DECORATIVE LAYERS ═══ -->
+    <div class="parallax-dots" aria-hidden="true">
+        <div class="floating-dot" style="top:8%;left:12%;"></div>
+        <div class="floating-dot" style="top:22%;left:85%;"></div>
+        <div class="floating-dot" style="top:45%;left:7%;"></div>
+        <div class="floating-dot" style="top:60%;left:92%;"></div>
+        <div class="floating-dot" style="top:78%;left:18%;"></div>
+        <div class="floating-dot" style="top:35%;left:55%;"></div>
+        <div class="floating-line" style="top:15%;left:75%;transform:rotate(35deg);"></div>
+        <div class="floating-line" style="top:50%;left:20%;transform:rotate(-20deg);"></div>
+        <div class="floating-line" style="top:70%;left:65%;transform:rotate(60deg);"></div>
+        <div class="floating-cross" style="top:30%;left:90%;"></div>
+        <div class="floating-cross" style="top:85%;left:40%;"></div>
+    </div>
+
+    <!-- ═══ FIXED NAVIGATION ═══ -->
+    <nav class="nav" id="nav">
+        <div class="nav-brand">NAS100</div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active" data-section="hero">HOME</a>
+            <a href="#jarvis" class="nav-link" data-section="jarvis">JARVIS</a>
+            <a href="#overview" class="nav-link" data-section="overview">OVERVIEW</a>
+            <a href="#analysis" class="nav-link" data-section="analysis">ANALYSIS</a>
+            <a href="#backtest" class="nav-link" data-section="backtest">BACKTEST</a>
+            <a href="#data" class="nav-link" data-section="data">DATA</a>
+        </div>
+    </nav>
+
+    <!-- ═══ SECTION 1: HERO ═══ -->
+    <section id="hero" class="section hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <p class="hero-eyebrow">QUANTITATIVE ANALYSIS</p>
+            <h1 class="hero-title">NAS100<br>OVERNIGHT GAP<br>ANALYZER</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Loading data...</p>
+            <a href="#jarvis" class="hero-cta">EXPLORE INSIGHTS</a>
+        </div>
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 2: JARVIS ═══ -->
+    <section id="jarvis" class="section">
+        <div class="container">
+            <div class="section-label">REAL-TIME INTELLIGENCE</div>
+            <h2 class="section-title">JARVIS</h2>
+
+            <div id="jarvis-loading" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Fetching live NAS100 data...</p>
+            </div>
+
+            <div id="jarvis-content" style="display:none;">
+                <!-- Status banner -->
+                <div class="jarvis-banner" id="jarvis-banner"></div>
+
+                <!-- Price cards -->
+                <div class="card-grid" id="jarvis-prices"></div>
+
+                <!-- Analysis insights -->
+                <div class="section-label" style="margin-top:40px;">ANALYSIS</div>
+                <div id="jarvis-insights"></div>
+
+                <!-- Trade outlook -->
+                <div class="outlook-box" id="jarvis-outlook"></div>
+
+                <!-- Fill levels -->
+                <div class="section-label" style="margin-top:40px;">EXPECTED FILL LEVELS | PRICE TARGETS</div>
+                <p class="section-desc" id="fill-levels-desc"></p>
+                <div class="card-grid" id="jarvis-fill-levels"></div>
+
+                <!-- Win rate stats -->
+                <div class="section-label" style="margin-top:40px;">WIN RATE | STRATEGY STATS</div>
+                <div class="card-grid" id="jarvis-win-stats"></div>
+
+                <!-- Historical breakdown -->
+                <div class="section-label" style="margin-top:40px;">HISTORICAL BREAKDOWN</div>
+                <div class="table-wrapper" id="jarvis-breakdown"></div>
+
+                <!-- Yesterday -->
+                <div class="section-label" style="margin-top:40px;">YESTERDAY'S SESSION</div>
+                <div class="card-grid" id="jarvis-yesterday"></div>
+
+                <p class="disclaimer">JARVIS insights are based on historical probabilities and do not constitute
+                    financial advice. Past performance does not guarantee future results.</p>
+            </div>
+
+            <div id="jarvis-error" style="display:none;" class="error-state"></div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 3: OVERVIEW ═══ -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-label">5-YEAR ANALYSIS</div>
+            <h2 class="section-title">OVERVIEW</h2>
+
+            <!-- Metric cards -->
+            <div class="card-grid" id="overview-cards"></div>
+
+            <!-- Gap distribution chart -->
+            <div class="chart-container" style="margin-top:50px;">
+                <h3 class="chart-title">GAP SIZE DISTRIBUTION</h3>
+                <p class="chart-subtitle">Histogram of overnight gap percentages, split by direction</p>
+                <canvas id="chart-distribution"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 4: ANALYSIS ═══ -->
+    <section id="analysis" class="section">
+        <div class="container">
+            <div class="section-label">DIMENSIONAL BREAKDOWN</div>
+            <h2 class="section-title">FILL RATE ANALYSIS</h2>
+
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3 class="chart-title">FILL RATE BY GAP SIZE</h3>
+                    <p class="chart-subtitle">Larger gaps are harder to fill within the session</p>
+                    <canvas id="chart-by-size"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">FILL RATE BY DAY OF WEEK</h3>
+                    <p class="chart-subtitle">Mid-week gaps tend to fill more frequently</p>
+                    <canvas id="chart-by-day"></canvas>
+                </div>
+            </div>
+
+            <!-- Stats tests -->
+            <div class="stats-grid" id="stats-tests" style="margin-top:50px;">
+                <div class="section-label">STATISTICAL SIGNIFICANCE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 5: BACKTEST ═══ -->
+    <section id="backtest" class="section">
+        <div class="container">
+            <div class="section-label">STRATEGY PERFORMANCE</div>
+            <h2 class="section-title">GAP-FILL BACKTEST</h2>
+
+            <div class="card-grid" id="backtest-cards"></div>
+
+            <div class="chart-container" style="margin-top:50px;">
+                <h3 class="chart-title">CUMULATIVE RETURN</h3>
+                <p class="chart-subtitle">Hypothetical strategy: fade every gap, target previous close</p>
+                <canvas id="chart-cumulative"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 6: RAW DATA ═══ -->
+    <section id="data" class="section">
+        <div class="container">
+            <div class="section-label">EXPLORER</div>
+            <h2 class="section-title">RAW GAP DATA</h2>
+
+            <div class="table-wrapper">
+                <table class="data-table" id="gaps-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Direction</th>
+                            <th>Gap %</th>
+                            <th>Category</th>
+                            <th>Filled</th>
+                            <th>Fill %</th>
+                            <th>Day Return</th>
+                            <th>Day</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gaps-tbody"></tbody>
+                </table>
+            </div>
+            <div class="table-pagination" id="pagination"></div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <p>NAS100 Overnight Gap Analyzer &mdash; Built with real market data via Yahoo Finance</p>
+    </footer>
+
+    <!-- ═══ SCRIPTS (CDN, ES Modules) ═══ -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/ScrollTrigger.min.js"></script>
+
+    <script type="module" src="/static/js/hero.js?v=2"></script>
+    <script src="/static/js/charts.js?v=2"></script>
+    <script src="/static/js/effects.js?v=2"></script>
+    <script src="/static/js/app.js?v=2"></script>
+</body>
+
+</html>
